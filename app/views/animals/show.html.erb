@@ -1,0 +1,48 @@
+<h1><%= link_to @animal.name, @animal %></h1>
+
+
+<table  width=100%>  
+        <tr> <!-- Animal demographic information -->
+                <td>
+                        <table id="criteria"> 
+				<tr><td>Name</td><td><%= @animal.name %></td></tr>
+                                <tr><td>Gender</td><td><%= @gender %></td></tr>
+                                <tr><td>Birthdate</td><td><%= @animal.dob != nil ? @animal.dob.strftime('%m/%d/%Y') : "" %></td></tr>
+                                <tr><td>Age</td><td><%= Time.now.year -  @animal.dob.year %></td></tr>
+                                <tr><td>Species</td><td><%= @species %> </td></tr>
+                                <tr><td>Breed</td><td><%= @animal.breed%> </td></tr>
+                                <tr><td>Markings</td><td><%= @animal.markings %> </td></tr>
+                                <tr><td>Fixed</td><td><%= @animal.isFixed %></td></tr>
+                                <tr><td>Note</td><td><%= @animal.note %></td></tr>
+                        </table>
+                </td>
+                <td>
+                        <table id="criteria">
+                                <tr><td>Microchip</td><td><%= @animal.microchipNumber %></td></tr>
+                                <tr><td>Date Implanted</td><td><%= @animal.dateImplanted != nil ? @animal.dateImplanted.strftime('%m/%d/%Y') : "" %></td></tr>
+                                <tr><td>Manufacturer</td><td><%= @microchip %></td></tr>
+                                <tr><td>Good with other dogs</td><td><%= @animal.dogs %></td></tr>
+                                <tr><td>Good with cats</td><td><%= @animal.cats %></td></tr>
+                                <tr><td>Good with kids</td><td><%= @animal.kids %> </td></tr>
+                                <tr><td>Hypoallergetic</td><td><%= @animal.isHypo %></td></tr>
+                                <tr><td>Adoption Status</td><td><%= @status %></td></tr>
+                                <tr><td>Personality</td><td><ul>
+				  <% @animal.personalities.each do |p| %>
+				    <li><%= p.name %></li>
+				  <% end %>
+				</ul></td></tr>
+                        </table>
+                </td>
+                <td id="leftHand">
+                        <table id=criteria>
+                                <tr><td id="rightHand"><b>Picture:</b></td></tr>
+                                <tr><td></td></tr>
+                        </table>
+                </td>
+        </tr>
+        <tr>
+                <td colspan=3 id="leftHand"><%= link_to "Edit", edit_animal_path(@animal)  %></td>
+        </tr>   <!-- end demographic information -->
+</table>
+<%= link_to "Add Vital", new_animal_vital_path %>
+<%= link_to "Back", animal_path %>

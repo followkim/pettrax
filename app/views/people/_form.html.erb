@@ -1,0 +1,38 @@
+<%= form_with model: @person do |form| %>
+  <div>
+<table  width=100%>
+        <tr> <!-- Person demographic information -->
+                <td>
+                        <table id="criteria">
+                                <tr><td>First Name</td><td><%= form.text_field :first_name %></td></tr>
+                                <tr><td>Last Name</td><td><%= form.text_field :last_name %></td></tr>
+                                <tr><td>Address</td><td><%= form.text_field :address1 %></td></tr>
+                                <tr><td></td><td><%= form.text_field :address2 %></td></tr>
+                                <tr><td>City</td><td><%= form.text_field :city %></td></tr>
+                                <tr><td>State</td><td><%= form.text_field :state %></td></tr>
+                                <tr><td>Zip</td><td><%= form.text_field :zip %></td></tr>
+                                <tr><td>Email</td><td><%= form.text_field :email %></td></tr>
+                        </table>
+                </td>
+		<td>
+			<table>
+                                <tr><td>Phone</td><td><%= form.text_field :phone %></td></tr>
+                                <tr><td>Is Organization?</td><td>
+                                       <%= form.label :isOrg, 'Yes' %><%= form.radio_button :isOrg, true %><br>
+                                       <%= form.label :isOrg, 'No' %><%= form.radio_button :isOrg, false %>
+                                </td></tr>
+			</table>
+                <td>
+                        <table id="criteria">
+                        </table>
+                </td>
+        </tr>
+</table>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to "Back", people_path %>

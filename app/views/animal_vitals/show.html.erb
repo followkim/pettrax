@@ -1,0 +1,65 @@
+<h1>Vitals for <%= link_to @animal.name, @animal %></h1>
+
+<table id=tabular>
+<?php 
+        foreach ($vitalList as $vital) {
+?>
+        <tr >
+                <td colspan="5">
+                        <font color="purple"><b><a href="viewVitals.php?animalID=<?= $animalID ?>&vitalSignTypeID=<?= $vital['vitalSignTypeID'] ?>"><?= $vital['vitalSignTypeName'] ?></b></font>
+                </td>
+        </tr>
+        <tr>
+          <th width="150px">Date</th>
+          <th width="150px">Value</th>
+          <th width="100px">Range</th>
+          <th>Note</th>
+          <th width="100px">&nbsp;</th>
+        </tr>
+        <?php
+                $sql = "select * FROM VitalSign WHERE animalID=$animalID and vitalSignTypeID=".$vital['vitalSignTypeID'] . " ORDER BY vitalDateTime DESC";
+                $result = $mysqli->query($sql);
+                if ($mysqli->errno)   errorPage($mysqli->errno, $mysqli->error, $sql);
+                while ($row=$result->fetch_array()) {
+        ?>
+        <tr>
+                <td><?= MySQL2Date($row['vitalDateTime']) ?> <?= MySQL2Time($row['vitalDateTime']) ?>&nbsp;</td>
+                <td><font color="<?php
+                        $modifier='';
+                        if (($vital['low']+$vital['low'])>0) {
+                                if ($row['vitalValue'] < $vital['low']) {
+                                        echo "blue";
+                                        $modifier=" L";
+                                } else if ($row['vitalValue'] > $vital['hi']) {
+                                        echo "red";
+                                        $modifier=" H";
+                                } else echo "black";
+                        }
+                ?>"><?= $row['vitalValue']." ".$vital['units'].$modifier ?>&nbsp;</font></td>
+                <td><?= $vital['range'] ?>&nbsp;</td>
+                <td style="white-space: pre-line;"><?= $row['note'] ?>&nbsp;</td>
+                <td>
+                        <a href="<?= "viewVitals.php?animalID=$animalID&vitalSignTypeID=".$vital['vitalSignTypeID']."&vitalDateTime=".$row['vitalDateTime']."&action=edit" ?>">Edit</a> / 
+                        <a href="<?= "viewVitals.php?animalID=$animalID&vitalSignTypeID=".$vital['vitalSignTypeID']."&vitalDateTime=".$row['vitalDateTime']."&action=delete" ?>"
+                                onclick="return confirm('Are you sure you want to delete this record?  This action can not be undone.');">Delete</a>
+                </td>
+        </tr>
+        <?php
+                }
+        ?>
+        <tr><td colspan="5">&nbsp;</td></tr> <!--  Blank row -->
+<?php
+        }
+?>
+</table>
+
+<table>
+<tr><td><b>Key</b></td></tr>
+<tr><td><font color="blue">Blue:</font> Too Low</td></tr>
+<tr><td><font color="red">Red: </font> Too High</td></tr>
+<tr><td><font color="black">Black: </font> Within Range</td></tr>
+</table>
+
+
+<%= link_to "Add Vital", new_animal_vital_path %>
+<%= link_to "Back", animal_path %>

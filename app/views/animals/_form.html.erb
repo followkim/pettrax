@@ -1,0 +1,87 @@
+<%= form_with model: @animal do |form| %>
+  <div>
+<table id=criteria>
+                <tr>
+                        <td>    <!-- Column 1 -->
+                                <table > <!-- first column of demographic information -->
+                                        <tr><td><%= form.label :name %></td><td><%= form.text_field :name %></tr>
+                                        <tr>
+                                                <td style="text-align: right;">Gender: </td>
+                                                <td style="text-align: left;" ><%= form.collection_select(:genders_id, Gender.all, :id, :name, selected: @animal.genders_id) %></td>
+                                        </tr>
+
+                                        <tr><td>Neutered / Spayed?</td><td>
+                                                                                <%= form.label :isFixed, 'Yes' %><%= form.radio_button :isFixed, true %><br>
+                                                                                <%= form.label :isFixed, 'No' %><%= form.radio_button :isFixed, false %>
+                                        </td></tr>
+
+
+
+                                        <tr><td><%= form.label :dob, "Birthdate" %></td><td><%= form.date_field :dob %></tr>
+                                        <tr>
+                                                <td></td>
+                                                <td style="text-align: left;" >
+                                                        Or: <input type="txt" size=7 name="estbirthdateNumber">
+                                                        <select name="estbirthdateInterval">
+                                                                        <option value="D">Days</option>
+                                                                        <option value="W">Weeks</option>
+                                                                        <option value="M">Months</option>
+                                                                        <option value="Y">Years</option>
+                                                        </select>
+                                                </td>
+                                        </tr>
+                                        <tr>
+                                                <td style="text-align: right;"><b>Species*</b> </td>
+                                                <td style="text-align: left;" ><%= form.collection_select(:species_id, Species.all, :id, :name,  selected: @animal.species_id) %></td>
+                                        </tr>
+                                        <tr><td><%= form.label :breed, "Breed" %></td><td><%= form.text_field :breed %></tr>
+                                        <tr><td><%= form.label :breed, "Markings" %></td><td><%= form.text_field :markings %></tr>
+                                        <tr><td>Personality</td><td><%= form.collection_check_boxes :personality_ids, Personality.all, :id, :name do |p| %>
+  								<%= p.label { p.check_box + p.text } %><br>
+								<% end %></td></tr>
+                </table>
+                      </td>
+                        <td>    <!-- Column 2 -->
+                                <table>
+                                        <tr><td><%= form.label :microchipNumber, "Microchip #" %></td><td><%= form.text_field :microchipNumber %></tr>
+                                        <tr><td><%= form.label :dateImplanted, "Date Implanted" %></td><td><%= form.date_field :dateImplanted %></tr>
+                                        <tr><td><%= form.label :microchip_id, "Manufactuer" %></td><td><%= form.collection_select(:microchips_id, Microchip.all, :id, :name, prompt: true, selected: @animal.microchips_id) %></td></tr>
+                                        <tr><td><%= form.label :dogs, "Good with dogs?" %></td><td>
+                                                                                <%= form.label :dogs, 'Yes' %><%= form.radio_button :dogs, true %><br>
+                                                                                <%= form.label :dogs, 'No' %><%= form.radio_button :dogs, false %><br>
+                                                                                <%= form.label :dogs, 'Unsure' %><%= form.radio_button :dogs, '' %>
+                                        </td></tr>
+                                        <tr><td><%= form.label :cats, "Good with cats?" %></td><td>
+                                                                                <%= form.label :cats, 'Yes' %><%= form.radio_button :cats, true %><br>
+                                                                                <%= form.label :cats, 'No' %><%= form.radio_button :cats, false %><br>
+                                                                                <%= form.label :cats, 'Unsure' %><%= form.radio_button :cats, '' %>
+                                        </td></tr>
+                                        <tr><td><%= form.label :kids, "Good with kids?" %></td><td>
+                                                                                <%= form.label :kids, 'Yes' %><%= form.radio_button :kids, true %><br>
+                                                                                <%= form.label :kids, 'No' %><%= form.radio_button :kids, false %><br>
+                                                                                <%= form.label :kids, 'Unsure' %><%= form.radio_button :kids, '' %>
+                                        </td></tr>
+                                        <tr><td>Adoption Status</td><td style="text-align: left;" ><%= form.collection_select(:statuses_id, Status.all, :id, :name,  prompt: true, selected: @animal.statuses_id) %></td></tr>
+
+                                </table>
+                        </td>
+                        <td>    <!-- Column 3 -->
+                                <table>
+                                </table>
+                        </td>
+                </tr>
+                <tr>
+                        <td colspan="3"><%= form.label :note, "Note" %></td><td><%= form.text_field :note %>
+                        </td>
+                </tr>
+        </table>
+
+
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+

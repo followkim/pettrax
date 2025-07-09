@@ -1,0 +1,32 @@
+<h1><%= link_to @person.isOrg == true ? @person.last_name : @person.first_name + ' ' + @person.last_name, @person %></h1>
+
+<table  width=100%>
+        <tr> <!-- Person demographic information -->
+                <td>
+                        <table id="criteria">
+                                <tr><td>First Name</td><td><%= @person.first_name %></td></tr>
+                                <tr><td>Last Name</td><td><%= @person.last_name %></td></tr>
+                                <tr><td>Address</td><td><%= @person.address1 %></td></tr>
+                                <tr><td></td><td><%= @person.address2 %></td></tr>
+                                <tr><td>City</td><td><%= @person.city %></td></tr>
+                                <tr><td>State</td><td><%= @person.state %></td></tr>
+                                <tr><td>Zip</td><td><%= @person.zip %></td></tr>
+                                <tr><td>Email</td><td><%= @person.email %></td></tr>
+                        </table>
+                </td>
+		<td>
+			<table>
+                                <tr><td>Phone</td><td><%= @person.phone %></td></tr>
+                                <tr><td>Is Organization?</td><td><%= @person.isOrg %></td></tr>
+			</table>
+                </td>
+		<td>
+                        <table id="criteria">
+                        </table>
+                </td>
+        </tr>
+        <tr>
+                <td colspan=3 id="leftHand"><%= link_to "Edit", edit_person_path(@person) %> </td>
+        </tr>   <!-- end demographic information -->
+</table>
+<%= link_to "Back", people_path %>

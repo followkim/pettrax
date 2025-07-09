@@ -1,0 +1,11 @@
+<h1>People</h1>
+
+<div id="people">
+  <% @people.each do |person| %>
+    <div>
+        <%= link_to person.isOrg == true ? person.last_name : person.first_name + " " + person.last_name, person %>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "Add Person", new_person_path %>
