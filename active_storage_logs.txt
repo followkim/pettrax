@@ -1,0 +1,119 @@
+tarted PATCH "/animals/2" for 209.63.132.196 at 2025-07-11 19:19:11 -0700
+Cannot render console from 209.63.132.196! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AnimalsController#update as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "animal" => {"name" => "DiegoDog", "genders_id" => "2", "isFixed" => "true", "dob" => "2012-01-01", "species_id" => "1", "breed" => "chi mix", "markings" => "fawn with heart on back", "personality_ids" => ["", "1", "2", "4"], "microchipNumber" => "1359322C", "dateImplanted" => "2012-05-05", "microchips_id" => "1", "dogs" => "true", "cats" => "true", "kids" => "true", "statuses_id" => "5", "photo" => #<ActionDispatch::Http::UploadedFile:0x000073d71fd6bc70 @tempfile=#<Tempfile:/tmp/RackMultipart20250711-507013-caj5xj.jpg>, @content_type="image/jpeg", @original_filename="diego_colorful.jpg", @headers="Content-Disposition: form-data; name=\"animal[photo]\"; filename=\"diego_colorful.jpg\"\r\nContent-Type: image/jpeg\r\n">, "note" => "very sweet boy!"}, "estbirthdateNumber" => "", "estbirthdateInterval" => "D", "commit" => "Update Animal", "id" => "2"}
+  Session Load (0.1ms)  SELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 4 LIMIT 1 /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/concerns/authentication.rb:29:in 'Authentication#find_session_by_cookie'
+  Animal Load (0.0ms)  SELECT "animals".* FROM "animals" WHERE "animals"."id" = 2 LIMIT 1 /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:54:in 'AnimalsController#set_animal'
+  TRANSACTION (0.1ms)  BEGIN immediate TRANSACTION /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  Personality Load (0.0ms)  SELECT "personalities".* FROM "personalities" WHERE "personalities"."id" IN (1, 2, 4) /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  Personality Load (0.0ms)  SELECT "personalities".* FROM "personalities" INNER JOIN "animal_personalities" ON "personalities"."id" = "animal_personalities"."personality_id" WHERE "animal_personalities"."animal_id" = 2 /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  Species Load (0.0ms)  SELECT "species".* FROM "species" WHERE "species"."id" = 1 LIMIT 1 /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  ActiveStorage::Blob Load (0.0ms)  SELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = 2 AND "active_storage_attachments"."record_type" = 'Animal' AND "active_storage_attachments"."name" = 'photo' LIMIT 1 /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  ActiveStorage::Attachment Load (0.0ms)  SELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 2 AND "active_storage_attachments"."record_type" = 'Animal' AND "active_storage_attachments"."name" = 'photo' LIMIT 1 /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  ActiveStorage::Attachment Destroy (0.0ms)  DELETE FROM "active_storage_attachments" WHERE "active_storage_attachments"."id" = 6 /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  ActiveStorage::Blob Create (0.0ms)  INSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ('r4e0beiuy0y9w2mq71r3u4nctuy9', 'diego_colorful.jpg', 'image/jpeg', '{"identified":true}', 'local', 10357, 'hSmCdWX4W1VFU2h1T8RPMQ==', '2025-07-12 02:19:11.776599') RETURNING "id" /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  ActiveStorage::Attachment Create (0.0ms)  INSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ('photo', 'Animal', 2, 7, '2025-07-12 02:19:11.778960') RETURNING "id" /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  Animal Update (0.0ms)  UPDATE "animals" SET "updated_at" = '2025-07-12 02:19:11.779824' WHERE "animals"."id" = 2 /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  TRANSACTION (4.7ms)  COMMIT TRANSACTION /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  Disk Storage (0.1ms) Uploaded file to key: r4e0beiuy0y9w2mq71r3u4nctuy9 (checksum: hSmCdWX4W1VFU2h1T8RPMQ==)
+  ActiveStorage::Blob Load (0.0ms)  SELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = 6 LIMIT 1 /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+[ActiveJob] Enqueued ActiveStorage::PurgeJob (Job ID: a43c9974-7e11-4298-936b-7584c2bb4425) to Async(default) with arguments: #<GlobalID:0x000073d71f3848b0 @uri=#<URI::GID gid://animaltrax/ActiveStorage::Blob/6>>
+[ActiveJob] ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: b17b46b3-0031-4b52-95a7-9941c1bca858) to Async(default) with arguments: #<GlobalID:0x000073d71f800128 @uri=#<URI::GID gid://animaltrax/ActiveStorage::Blob/7>>
+[ActiveJob] ↳ app/controllers/animals_controller.rb:39:in 'AnimalsController#update'
+  TRANSACTION (0.0ms)  BEGIN immediate TRANSACTION /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:40:in 'AnimalsController#update'
+  ActiveStorage::Attachment Destroy (0.6ms)  DELETE FROM "active_storage_attachments" WHERE "active_storage_attachments"."id" = 7 /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:40:in 'AnimalsController#update'
+  Animal Update (0.0ms)  UPDATE "animals" SET "updated_at" = '2025-07-12 02:19:11.797744' WHERE "animals"."id" = 2 /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:40:in 'AnimalsController#update'
+  TRANSACTION (0.0ms)  COMMIT TRANSACTION /*action='update',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:40:in 'AnimalsController#update'
+[ActiveJob] Enqueued ActiveStorage::PurgeJob (Job ID: 00ecc717-057c-4430-a6e6-92943badb1f6) to Async(default) with arguments: #<GlobalID:0x000073d71fa25f48 @uri=#<URI::GID gid://animaltrax/ActiveStorage::Blob/7>>
+[ActiveJob] ↳ app/controllers/animals_controller.rb:40:in 'AnimalsController#update'
+Redirected to http://el3ktra.net:3050/animals/2
+Completed 302 Found in 56ms (ActiveRecord: 6.4ms (14 queries, 0 cached) | GC: 0.0ms)
+
+
+[ActiveJob] [ActiveStorage::PurgeJob] [a43c9974-7e11-4298-936b-7584c2bb4425]   ActiveStorage::Blob Load (0.1ms)  SELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = 6 LIMIT 1 /*application='Animaltrax'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [a43c9974-7e11-4298-936b-7584c2bb4425] Performing ActiveStorage::PurgeJob (Job ID: a43c9974-7e11-4298-936b-7584c2bb4425) from Async(default) enqueued at 2025-07-12T02:19:11.789083090Z with arguments: #<GlobalID:0x000073d73c0c4a18 @uri=#<URI::GID gid://animaltrax/ActiveStorage::Blob/6>>
+[ActiveJob] [ActiveStorage::PurgeJob] [a43c9974-7e11-4298-936b-7584c2bb4425]   TRANSACTION (0.0ms)  BEGIN immediate TRANSACTION /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [a43c9974-7e11-4298-936b-7584c2bb4425]   ActiveStorage::Attachment Exists? (1.3ms)  SELECT 1 AS one FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = 6 LIMIT 1 /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [a43c9974-7e11-4298-936b-7584c2bb4425]   ActiveStorage::VariantRecord Load (0.0ms)  SELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = 6 /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [a43c9974-7e11-4298-936b-7584c2bb4425]   ActiveStorage::Attachment Load (0.0ms)  SELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 6 AND "active_storage_attachments"."record_type" = 'ActiveStorage::Blob' AND "active_storage_attachments"."name" = 'preview_image' LIMIT 1 /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [a43c9974-7e11-4298-936b-7584c2bb4425]   ActiveStorage::Blob Destroy (0.0ms)  DELETE FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = 6 /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [a43c9974-7e11-4298-936b-7584c2bb4425]   TRANSACTION (0.0ms)  COMMIT TRANSACTION /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [a43c9974-7e11-4298-936b-7584c2bb4425]   Disk Storage (0.0ms) Deleted file from key: fxwwxg7pikrsharimo000ef7xsqk
+[ActiveJob] [ActiveStorage::PurgeJob] [a43c9974-7e11-4298-936b-7584c2bb4425]   Disk Storage (0.0ms) Deleted files by key prefix: variants/fxwwxg7pikrsharimo000ef7xsqk/
+[ActiveJob] [ActiveStorage::PurgeJob] [a43c9974-7e11-4298-936b-7584c2bb4425] Performed ActiveStorage::PurgeJob (Job ID: a43c9974-7e11-4298-936b-7584c2bb4425) from Async(default) in 15.37ms
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b17b46b3-0031-4b52-95a7-9941c1bca858]   ActiveStorage::Blob Load (0.1ms)  SELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = 7 LIMIT 1 /*application='Animaltrax'*/
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b17b46b3-0031-4b52-95a7-9941c1bca858] Performing ActiveStorage::AnalyzeJob (Job ID: b17b46b3-0031-4b52-95a7-9941c1bca858) from Async(default) enqueued at 2025-07-12T02:19:11.790599864Z with arguments: #<GlobalID:0x000073d745ae5840 @uri=#<URI::GID gid://animaltrax/ActiveStorage::Blob/7>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b17b46b3-0031-4b52-95a7-9941c1bca858] Skipping image analysis because the ruby-vips gem isn't installed
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b17b46b3-0031-4b52-95a7-9941c1bca858]   TRANSACTION (0.0ms)  BEGIN immediate TRANSACTION /*application='Animaltrax',job='ActiveStorage%3A%3AAnalyzeJob'*/
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b17b46b3-0031-4b52-95a7-9941c1bca858]   ActiveStorage::Blob Update (1.2ms)  UPDATE "active_storage_blobs" SET "metadata" = '{"identified":true,"analyzed":true}' WHERE "active_storage_blobs"."id" = 7 /*application='Animaltrax',job='ActiveStorage%3A%3AAnalyzeJob'*/
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b17b46b3-0031-4b52-95a7-9941c1bca858]   ActiveStorage::Attachment Load (0.0ms)  SELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = 7 /*application='Animaltrax',job='ActiveStorage%3A%3AAnalyzeJob'*/
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b17b46b3-0031-4b52-95a7-9941c1bca858]   TRANSACTION (0.0ms)  COMMIT TRANSACTION /*application='Animaltrax',job='ActiveStorage%3A%3AAnalyzeJob'*/
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b17b46b3-0031-4b52-95a7-9941c1bca858] Performed ActiveStorage::AnalyzeJob (Job ID: b17b46b3-0031-4b52-95a7-9941c1bca858) from Async(default) in 8.72ms
+[ActiveJob] [ActiveStorage::PurgeJob] [00ecc717-057c-4430-a6e6-92943badb1f6]   ActiveStorage::Blob Load (0.1ms)  SELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = 7 LIMIT 1 /*application='Animaltrax'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [00ecc717-057c-4430-a6e6-92943badb1f6] Performing ActiveStorage::PurgeJob (Job ID: 00ecc717-057c-4430-a6e6-92943badb1f6) from Async(default) enqueued at 2025-07-12T02:19:11.798906502Z with arguments: #<GlobalID:0x000073d745c54ca8 @uri=#<URI::GID gid://animaltrax/ActiveStorage::Blob/7>>
+[ActiveJob] [ActiveStorage::PurgeJob] [00ecc717-057c-4430-a6e6-92943badb1f6]   TRANSACTION (0.0ms)  BEGIN immediate TRANSACTION /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [00ecc717-057c-4430-a6e6-92943badb1f6]   ActiveStorage::Attachment Exists? (1.0ms)  SELECT 1 AS one FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = 7 LIMIT 1 /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [00ecc717-057c-4430-a6e6-92943badb1f6]   ActiveStorage::VariantRecord Load (0.0ms)  SELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = 7 /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [00ecc717-057c-4430-a6e6-92943badb1f6]   ActiveStorage::Attachment Load (0.1ms)  SELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 7 AND "active_storage_attachments"."record_type" = 'ActiveStorage::Blob' AND "active_storage_attachments"."name" = 'preview_image' LIMIT 1 /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [00ecc717-057c-4430-a6e6-92943badb1f6]   ActiveStorage::Blob Destroy (0.0ms)  DELETE FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = 7 /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [00ecc717-057c-4430-a6e6-92943badb1f6]   TRANSACTION (0.0ms)  COMMIT TRANSACTION /*application='Animaltrax',job='ActiveStorage%3A%3APurgeJob'*/
+[ActiveJob] [ActiveStorage::PurgeJob] [00ecc717-057c-4430-a6e6-92943badb1f6]   Disk Storage (0.0ms) Deleted file from key: r4e0beiuy0y9w2mq71r3u4nctuy9
+[ActiveJob] [ActiveStorage::PurgeJob] [00ecc717-057c-4430-a6e6-92943badb1f6]   Disk Storage (0.0ms) Deleted files by key prefix: variants/r4e0beiuy0y9w2mq71r3u4nctuy9/
+[ActiveJob] [ActiveStorage::PurgeJob] [00ecc717-057c-4430-a6e6-92943badb1f6] Performed ActiveStorage::PurgeJob (Job ID: 00ecc717-057c-4430-a6e6-92943badb1f6) from Async(default) in 20.42ms
+Started GET "/animals/2" for 209.63.132.196 at 2025-07-11 19:19:11 -0700
+Cannot render console from 209.63.132.196! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AnimalsController#show as TURBO_STREAM
+  Parameters: {"id" => "2"}
+  Animal Load (0.0ms)  SELECT "animals".* FROM "animals" WHERE "animals"."id" = 2 LIMIT 1 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:54:in 'AnimalsController#set_animal'
+  Gender Load (0.0ms)  SELECT "genders".* FROM "genders" WHERE "genders"."id" = 2 LIMIT 1 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:10:in 'AnimalsController#show'
+  Species Load (0.0ms)  SELECT "species".* FROM "species" WHERE "species"."id" = 1 LIMIT 1 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:11:in 'AnimalsController#show'
+  Microchip Load (0.0ms)  SELECT "microchips".* FROM "microchips" WHERE "microchips"."id" = 1 LIMIT 1 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:12:in 'AnimalsController#show'
+  Status Load (0.0ms)  SELECT "statuses".* FROM "statuses" WHERE "statuses"."id" = 5 LIMIT 1 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/animals_controller.rb:13:in 'AnimalsController#show'
+  Rendering layout layouts/application.html.erb
+  Rendering animals/show.html.erb within layouts/application
+  Personality Load (0.0ms)  SELECT "personalities".* FROM "personalities" INNER JOIN "animal_personalities" ON "personalities"."id" = "animal_personalities"."personality_id" WHERE "animal_personalities"."animal_id" = 2 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/views/animals/show.html.erb:30
+  AnimalVital Load (0.0ms)  SELECT "animal_vitals".* FROM "animal_vitals" WHERE "animal_vitals"."animal_id" = 2 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/views/animal_vitals/_animal_vitals.html.erb:11
+  Vital Load (0.0ms)  SELECT "vitals".* FROM "vitals" WHERE "vitals"."id" = 4 LIMIT 1 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/views/animal_vitals/_animal_vitals.html.erb:12
+  Vital Load (0.0ms)  SELECT "vitals".* FROM "vitals" WHERE "vitals"."id" = 2 LIMIT 1 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/views/animal_vitals/_animal_vitals.html.erb:12
+  Vital Load (0.0ms)  SELECT "vitals".* FROM "vitals" WHERE "vitals"."id" = 5 LIMIT 1 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/views/animal_vitals/_animal_vitals.html.erb:12
+  Vital Load (0.0ms)  SELECT "vitals".* FROM "vitals" WHERE "vitals"."id" = 3 LIMIT 1 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/views/animal_vitals/_animal_vitals.html.erb:12
+  CACHE Vital Load (0.0ms)  SELECT "vitals".* FROM "vitals" WHERE "vitals"."id" = 4 LIMIT 1
+  ↳ app/views/animal_vitals/_animal_vitals.html.erb:12
+  Rendered animal_vitals/_animal_vitals.html.erb (Duration: 8.1ms | GC: 1.0ms)
+  Rendered animals/show.html.erb within layouts/application (Duration: 10.1ms | GC: 1.0ms)
+  Session Load (0.0ms)  SELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 4 LIMIT 1 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/controllers/concerns/authentication.rb:29:in 'Authentication#find_session_by_cookie'
+  User Load (0.0ms)  SELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='Animaltrax',controller='animals'*/
+  ↳ app/models/current.rb:3:in 'Current#user'
+  Rendered layout layouts/application.html.erb (Duration: 11.5ms | GC: 1.0ms)
+Completed 200 OK in 27ms (Views: 17.0ms | ActiveRecord: 0.6ms (14 queries, 1 cached) | GC: 1.7ms)
