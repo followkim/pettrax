@@ -1,0 +1,27 @@
+<div id="animal_vitals">
+	<table id="tabular">
+		<th>Date / Time</th>
+		<th>Vital Name</th>
+		<th>Value</th>
+		<th>Flag</th>
+		<th>Range</th>
+		<th>Note</th>
+		<th></th>
+		<th></th>
+		<% @animal_vitals.each do |animal_vital| %>
+			<% @vital = Vital.find(animal_vital.vital_id) %>	
+			<tr>
+				<td><%= animal_vital.dt.strftime('%m/%d/%Y') %>
+				<td><%= @vital.short_name %></td>
+				<td><%= raw @vital.low != nil ? (animal_vital.value < @vital.low ? "<font color=\"blue\" >"+animal_vital.value.to_s+" "+@vital.units+"</font>" : (animal_vital.value > @vital.hi ? "<font color='red'>"+animal_vital.value.to_s+" "+@vital.units+"</font>" : animal_vital.value )) : animal_vital.value %> </td>
+ 				<td><%= raw @vital.low != nil ? (animal_vital.value < @vital.low ? "<font color='blue'>L</font>" : (animal_vital.value > @vital.hi ? "<font color='red'>H</font>" : "")) : "" %> </td>
+				<td><%= @vital.low %> - <%= @vital.hi %></td>
+				<td><%= animal_vital.note %></td>
+				<td><%= link_to "Edit", edit_animal_vital_path(animal_vital)  %></td>
+				<td><%= button_to "Delete", delete_animal_vital_path(animal_vital.id), method: :delete, data: { turbo_confirm: "Are you sure?" } %></td>
+
+			</tr>
+		<% end %>
+	</table>
+	<%= link_to "Add New", new_animal_vital_path(@animal) %>
+</div>

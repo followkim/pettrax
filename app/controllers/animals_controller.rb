@@ -10,7 +10,8 @@ class AnimalsController < ApplicationController
     @gender =    @animal.species_id != nil ? Gender.find(@animal.genders_id).name : ""
     @species =    @animal.species_id != nil ? Species.find(@animal.species_id).name : ""
     @microchip =  @animal.microchips_id != nil ? Microchip.find(@animal.microchips_id).name : ""
-    @status =  @animal.statuses_id != nil ? Status.find(@animal.statuses_id).name : ""
+    @status =     @animal.statuses_id != nil ? Status.find(@animal.statuses_id).name : ""
+    @animal_vitals = AnimalVital.where(animal_id: @animal.id)
   end
 
   def new
@@ -21,6 +22,7 @@ class AnimalsController < ApplicationController
   def create
     @pageName = "Add Animal"
     @animal = Animal.new(animal_params)
+#    @animal.photo.attach(params[:photo])
     if @animal.save!
       redirect_to @animal
     else
@@ -35,6 +37,7 @@ class AnimalsController < ApplicationController
   def update
 #    Rails.error.subscribe(ErrorSubscriber.new)
     if @animal.update!(animal_params)
+      @animal.photo.attach(params[:photo])
       redirect_to @animal
     else
       render :edit, status: :unprocessable_entity
@@ -52,6 +55,6 @@ class AnimalsController < ApplicationController
     end
 
     def animal_params
-      params.expect(animal: [ :name, :species_id, :dob,  :genders_id, :breed, :markings, :microchipNumber, :dateImplanted, :dogs, :cats, :kids, :note, :isHypo, :isFixed, :microchips_id, :statuses_id, personality_ids: [] ])
+      params.expect(animal: [ :name, :species_id, :dob,  :genders_id, :breed, :markings, :microchipNumber, :dateImplanted, :dogs, :cats, :kids, :note, :isHypo, :isFixed, :microchips_id, :statuses_id, :photo, personality_ids: [] ])
     end
 end

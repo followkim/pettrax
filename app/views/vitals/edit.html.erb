@@ -1,0 +1,5 @@
+<h1>Edit Vital</h1>
+
+<%= render "form", vital: @vital %>
+<%= button_to "Delete", @vital, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+<%= link_to "Cancel", vitals_path %>

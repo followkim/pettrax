@@ -1,0 +1,21 @@
+<div id="animal_vitals">
+	<table>
+		<th>Date / Time</th>
+		<th>Vital Name</th>
+		<th>Value</th>
+		<th>Range</th>
+		<th>Flag</th>
+		<th>Note</th>
+		<% @animal_vitals.each do |animal_vital| %>
+			<% @vital = Vital.find(animal_vital.vital_id) %>	
+			<tr>
+				<td><%= animal_vital.dt.strftime('%m/%d/%Y') %>
+				<td><%= @vital.name %></td>
+				<td><%= animal_vital.value %></td>
+				<td>TODO</td>
+				<td>TODO</td>
+				<td><%= animal_vital.note %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>

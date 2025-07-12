@@ -13,7 +13,9 @@ class Animal < ApplicationRecord
   has_many :animal_vitals, dependent: :destroy
   has_many :vitals, through: :animal_vitals
 
-
+  has_one_attached :photo do |attachable|
+	attachable.variant :thumb, resize_to_limit: [50, 50]
+  end
 
   validates :name, :species, presence: true
   before_save :normalize_blank_values

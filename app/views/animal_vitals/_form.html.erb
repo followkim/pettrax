@@ -1,30 +1,28 @@
 
-<%= form_with model: @animal_vital do |form| %>
+<%= form_with url: @formRet, model: @animal_vital do |form| %>
   <div>
+ <%= form.hidden_field :animal_id, value: @animal.id %>
 <table id=criteria>
                 <tr>
                         <td>
                                 <table>
                                         <tr>
                                                 <td><b>Vital Sign Name:</b></td>
-                                                <td>%= form.collection_select(:vitals_id, Vitals.all, :id, :name, selected: @animal_vital.genders_id) %>
+                                                <td><%= form.collection_select(:vital_id, @vitals, :id, :name, selected: @animal_vital.vital_id) %></td>
 
-                                                </td>
                                         </tr>
                                         <tr>
 						<tr><td><%= form.label :value, "Value" %></td><td><%= form.text_field :value %></tr>
 						<select id="weightUnit" name="weightUnit" hidden><option value=1>lbs</option><option value=2.205>kgs</option></select>
                                         </tr>
-						<tr><td><%= form.label:, "Date Time" %></td><td><%= form.datetime_field :dt %></tr>
+						<tr><td><%= form.label :dt, "Date" %></td><td><%= form.date_field :dt, value: Date.today %></tr>
+						<tr><td><%= form.label :tm, "Time" %></td><td><%= form.time_field :tm, value: Time.now %></tr>
                                         <tr>
                                         </tr>
-						<tr><td><%= form.label:, "Note" %></td><td><%= form.blob_field :note %></tr>
+						<tr><td><%= form.label :note, "Note" %></td><td><%= form.text_area :note, rows: 10, cols: 50 %></tr>
                                         <tr>
                                                 <td colspan="2"> 
-                                                        <input hidden type="txt" name="action" value="<?= $action ?>"/>
-                                                        <input type="submit" value="<?= ($action=="edit"?"Edit":"Add") ?> Vital Sign" /> 
-                                                        <TODOinput type="submit" value="Cancel (not working)" formaction="<?="viewVaccination.php?animalID=$animalID"?>" /> 
-                                                        <a href="viewVitals.php?animalID=<?= $animalID ?>"><?= ($action=="edit"?"Add New":"Cancel") ?></a>
+							<%= form.submit %>
                                                 </td>
                                         </tr>
                                 </table>
@@ -34,9 +32,13 @@
                                         <tr><td colspan=2></td><b>Vital Sign Information for:</b></td></tr>
 					<tr><td>Birthdate</td><td><%= @animal.dob != nil ? @animal.dob.strftime('%m/%d/%Y') : "" %></td></tr>
 					<tr><td>Age</td><td><%= Time.now.year -  @animal.dob.year %></td></tr>
-                                        <tr><td style="text-align: left;" colspan="2"><%= link_to "Back to " + @animal.name, animal_path animal %></td></tr>
+                                        <tr><td style="text-align: left;" colspan="2"><%= link_to "Back to " + @animal.name, animal_path %></td></tr>
                                         </td></tr>
                                 </table>
                         </td>
                 </tr>
 </table>
+
+  </div>
+
+<% end %>

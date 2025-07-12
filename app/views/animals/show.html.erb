@@ -5,28 +5,28 @@
         <tr> <!-- Animal demographic information -->
                 <td>
                         <table id="criteria"> 
-				<tr><td>Name</td><td><%= @animal.name %></td></tr>
-                                <tr><td>Gender</td><td><%= @gender %></td></tr>
-                                <tr><td>Birthdate</td><td><%= @animal.dob != nil ? @animal.dob.strftime('%m/%d/%Y') : "" %></td></tr>
-                                <tr><td>Age</td><td><%= Time.now.year -  @animal.dob.year %></td></tr>
-                                <tr><td>Species</td><td><%= @species %> </td></tr>
-                                <tr><td>Breed</td><td><%= @animal.breed%> </td></tr>
-                                <tr><td>Markings</td><td><%= @animal.markings %> </td></tr>
-                                <tr><td>Fixed</td><td><%= @animal.isFixed %></td></tr>
-                                <tr><td>Note</td><td><%= @animal.note %></td></tr>
+				<tr><td id="leftHand">Name</td><td id="rightHand"><%= @animal.name %></td></tr>
+                                <tr><td id="leftHand">Gender</td><td id="rightHand"><%= @gender %></td></tr>
+                                <tr><td id="leftHand">Birthdate</td><td id="rightHand"><%= @animal.dob != nil ? @animal.dob.strftime('%m/%d/%Y') : "" %></td></tr>
+                                <tr><td id="leftHand">Age</td><td id="rightHand"><%= Time.now.year -  @animal.dob.year %></td></tr>
+                                <tr><td id="leftHand">Species</td><td id="rightHand"><%= @species %> </td></tr>
+                                <tr><td id="leftHand">Breed</td><td id="rightHand"><%= @animal.breed%> </td></tr>
+                                <tr><td id="leftHand">Markings</td><td id="rightHand"><%= @animal.markings %> </td></tr>
+                                <tr><td id="leftHand">Fixed</td><td id="rightHand"><%= @animal.isFixed %></td></tr>
+                                <tr><td id="leftHand">Note</td><td id="rightHand"><%= @animal.note %></td></tr>
                         </table>
                 </td>
                 <td>
                         <table id="criteria">
-                                <tr><td>Microchip</td><td><%= @animal.microchipNumber %></td></tr>
-                                <tr><td>Date Implanted</td><td><%= @animal.dateImplanted != nil ? @animal.dateImplanted.strftime('%m/%d/%Y') : "" %></td></tr>
-                                <tr><td>Manufacturer</td><td><%= @microchip %></td></tr>
-                                <tr><td>Good with other dogs</td><td><%= @animal.dogs %></td></tr>
-                                <tr><td>Good with cats</td><td><%= @animal.cats %></td></tr>
-                                <tr><td>Good with kids</td><td><%= @animal.kids %> </td></tr>
-                                <tr><td>Hypoallergetic</td><td><%= @animal.isHypo %></td></tr>
-                                <tr><td>Adoption Status</td><td><%= @status %></td></tr>
-                                <tr><td>Personality</td><td><ul>
+                                <tr><td  id="leftHand">Microchip</td><td id="rightHand"><%= @animal.microchipNumber %></td></tr>
+                                <tr><td  id="leftHand">Date Implanted</td><td id="rightHand"><%= @animal.dateImplanted != nil ? @animal.dateImplanted.strftime('%m/%d/%Y') : "" %></td></tr>
+                                <tr><td  id="leftHand">Manufacturer</td><td id="rightHand"><%= @microchip %></td></tr>
+                                <tr><td  id="leftHand">Good with other dogs</td><td id="rightHand"><%= @animal.dogs %></td></tr>
+                                <tr><td  id="leftHand">Good with cats</td><td id="rightHand"><%= @animal.cats %></td></tr>
+                                <tr><td  id="leftHand">Good with kids</td><td id="rightHand"><%= @animal.kids %> </td></tr>
+                                <tr><td id="leftHand">Hypoallergetic</td><td id="rightHand"><%= @animal.isHypo %></td></tr>
+                                <tr><td id="leftHand">Adoption Status</td><td id="rightHand"><%= @status %></td></tr>
+                                <tr><td id="leftHand">Personality</td><td><ul>
 				  <% @animal.personalities.each do |p| %>
 				    <li><%= p.name %></li>
 				  <% end %>
@@ -36,7 +36,7 @@
                 <td id="leftHand">
                         <table id=criteria>
                                 <tr><td id="rightHand"><b>Picture:</b></td></tr>
-                                <tr><td></td></tr>
+                                <tr><td><%= @animalPhoto!= nil ? image_tag(@animal.photo) : "" %></td></tr>
                         </table>
                 </td>
         </tr>
@@ -44,5 +44,14 @@
                 <td colspan=3 id="leftHand"><%= link_to "Edit", edit_animal_path(@animal)  %></td>
         </tr>   <!-- end demographic information -->
 </table>
-<%= link_to "Add Vital", new_animal_vital_path %>
+<table>
+	<tr>
+		<tr><td><h3>Vital Signs</h3></td></tr>
+		<td>
+			<div id="animal_vitals_part">
+				<%= render "animal_vitals/animal_vitals" %>
+			</div>
+		</td>
+	</tr>
+</table>
 <%= link_to "Back", animal_path %>

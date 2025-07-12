@@ -1,0 +1,25 @@
+<%= form_with model: @vital do |form| %>
+  <div>
+<table id=criteria>
+	<tr><td><%= form.label :name %></td><td><%= form.text_field :name %></tr>
+	<tr><td><%= form.label :short_name %></td><td><%= form.text_field :short_name  %></tr>
+	<tr>
+		<td style="text-align: right;"><b>Species*</b> </td>
+		<td style="text-align: left;" ><%= form.collection_select(:species_id, Species.all, :id, :name,   include_blank: 'All', selected: @vital.species_id) %></td>
+
+	</tr>
+	<tr><td><%= form.label :low %></td><td><%= form.number_field :low, step: :any  %></tr>
+	<tr><td><%= form.label :high %></td><td><%= form.number_field :hi, step: :any  %></tr>
+	<tr><td><%= form.label :units %></td><td><%= form.text_field :units  %></tr>
+
+	</table>
+
+
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+

@@ -1,24 +1,26 @@
 class AnimalVitalsController < ApplicationController
  allow_unauthenticated_access only: %i[ index show ]
-  before_action :set_animal_vital, only: %i[ show edit update destroy ]
   def index
-        @animal_vital = AnimalVital.all
+    @animal = Animal.find(params[:id])
+    @animal_vitals = AnimalVital.where(animal_id: @animal.id)
   end
 
   def show
     @pageName = "View Vitals"
-    @animal = @animal_vital.find(@animal_vital.animal_id).name
-    @vital = @animal_vital.find(@animal_vital.vital_id).name
+    @animal = Animals.find!(params[:id])
+    @animal_vitals = Animal.find(@animal.animal_id).name
   end
 
   def new
     @pageName = "New Vital"
+    @animal = Animal.find(params[:id])
     @animal_vital = AnimalVital.new
+    @vitals = Vital.where(species_id: @animal.species_id).or(Vital.where(species_id: nil))
   end
 
   def create
-    @pageName = "Add Vital"
-    @av = AnimalVital.new(animal_params)
+    @formRet = new_animal_vital_path
+    @av = AnimalVital.new(animal_vital_params)
     if @av.save!
       redirect_to @av.animal
     else
@@ -28,28 +30,34 @@ class AnimalVitalsController < ApplicationController
 
   def edit
     @pageName = "Edit Vital"
+    @formRet = edit_animal_vital_path(params[:id])
+    @animal_vital = AnimalVital.find(params[:id])
+    @animal = Animal.find(@animal_vital.animal_id)
+    @vitals = Vital.where(species_id: @animal.species_id).or(Vital.where(species_id: nil))
   end
 
   def update
 #    Rails.error.subscribe(ErrorSubscriber.new)
-    if @aanimal_vital.update!(animal_params)
-      redirect_to @animal_vital
+    @animal_vital = AnimalVital.find(params[:id])
+
+    if @animal_vital.update!(animal_vital_params)
+      @animal = Animal.find(@animal_vital.animal_id)
+      redirect_to @animal
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
+      @animal_vital = AnimalVital.find(params[:id])
+      @animal_id = @animal_vital.animal_id
       @animal_vital.destroy
-      redirect_to animal_vitals_path
+      redirect_to animal_path(@animal_id)
   end
 
   private
-    def set_animal_vital
-      @animal_vital = AnimalVital.find(params[:id])
-    end
 
-    def animal_params
-      params.expect(animal: [ :animal_id, :vital_id, :note, :value ])
+    def animal_vital_params
+      params.expect(animal_vital: [ :animal_id, :vital_id, :note, :value, :dt  ])
     end
 end

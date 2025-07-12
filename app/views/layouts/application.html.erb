@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Animaltrax" %></title>
+    <title><%= content_for(:title) || "PetTrax" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -19,6 +19,7 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "pettrax" %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -29,11 +30,11 @@
        <table>
                 <tr>
                         <!-- Pixie Icon -->
-                        <td ></td>
+                        <td><%= image_tag("AnimalTraxLogo.png", size: '100x100') %></td>
 
                         <!-- Banner title -->
                         <td style="vertical-align: bottom;">
-                        <font size=6><b><center>AnimalTrax Ruby on Rails Shelter Tracking System</center></b></font>
+                        <font size=6><b><center>PetTrax Animal Tracing System</center></b></font>
                         <p><font size=5><%= @pageName %></font></b>
                         </td>
                         <td style="text-align: right;">
